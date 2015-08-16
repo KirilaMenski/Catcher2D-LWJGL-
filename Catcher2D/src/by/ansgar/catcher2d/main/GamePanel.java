@@ -8,8 +8,8 @@ import org.lwjgl.opengl.DisplayMode;
 
 public class GamePanel {
 	
-	public static final int WIDTH = 950;
-	public static final int HEIGHT = 650;
+	public static final int WIDTH = 750;
+	public static final int HEIGHT = 550;
 	
 	
 	public GamePanel(){
