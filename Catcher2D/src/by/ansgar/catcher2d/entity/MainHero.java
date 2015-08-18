@@ -15,17 +15,14 @@ import by.ansgar.catcher2d.main.GamePanel;
 public class MainHero implements GameObject {
 
 	private int health;
-	private int x;
-	private int y;
+	private double x;
+	private double y;
 	private int speed;
-//	private Texture texture;
 
 	public MainHero() {
 		x = GamePanel.WIDTH / 2 - 25;
 		y = GamePanel.HEIGHT - 55;
 		speed = 3;
-
-//		texture = loadTexture("texture");
 	}
 
 	public void update(int dx, int dy) {
@@ -56,13 +53,13 @@ public class MainHero implements GameObject {
 
 		glBegin(GL_QUADS);
 		glTexCoord2f(0, 0);
-		glVertex2i(x, y);
+		glVertex2d(x, y);
 		glTexCoord2f(1, 0);
-		glVertex2i(x + 50, y);
+		glVertex2d(x + 50, y);
 		glTexCoord2f(1, 1);
-		glVertex2i(x + 50, y + 50);
+		glVertex2d(x + 50, y + 50);
 		glTexCoord2f(0, 1);
-		glVertex2i(x, y + 50);
+		glVertex2d(x, y + 50);
 		glEnd();
 
 	}
@@ -81,6 +78,22 @@ public class MainHero implements GameObject {
 
 	public void setSpeed(int speed) {
 		this.speed = speed;
+	}
+
+	public double getX() {
+		return x;
+	}
+
+	public void setX(double x) {
+		this.x = x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public void setY(double y) {
+		this.y = y;
 	}
 
 }

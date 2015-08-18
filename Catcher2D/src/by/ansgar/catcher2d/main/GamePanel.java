@@ -2,6 +2,10 @@ package by.ansgar.catcher2d.main;
 
 import static org.lwjgl.opengl.GL11.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
@@ -20,6 +24,7 @@ public class GamePanel {
 
 	public static MainHero hero;
 	public static Enemy enemy;
+	public static List<Enemy> enemys;
 	private Input input;
 	private Background background;
 	Texture heroSprite, enemySprite;
@@ -28,8 +33,11 @@ public class GamePanel {
 
 		hero = new MainHero();
 		enemy = new Enemy();
+		enemys = new ArrayList<Enemy>();
 		input = new Input();
 		background = new Background();
+
+		enemys.add(new Enemy());
 
 		try {
 			Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
@@ -51,20 +59,12 @@ public class GamePanel {
 		while (!Display.isCloseRequested()) {
 
 			glClear(GL_COLOR_BUFFER_BIT);
-			input.input();
+
+			input();
+			update();
+			draw();
+
 			// background.draw();
-
-			// Player
-			heroSprite.bind();
-			hero.draw();
-			hero.moving();
-			input.moveHero();
-
-			// Enemy
-			double angle = Math.toRadians(Math.random() * 360);
-			enemy.draw();
-			enemy.update((int)Math.sin(angle), (int)Math.cos(angle));
-			// enemy.moving();
 
 			Display.update();
 			Display.sync(60);
@@ -73,6 +73,35 @@ public class GamePanel {
 
 		Display.destroy();
 
+	}
+
+	private void input() {
+		// KeyBoarder
+		input.input();
+		input.moveHero();
+	}
+
+	private void update() {
+		// Enemy
+		for (int i = 0; i < enemys.size(); i++) {
+			enemys.get(i).update();
+		}
+
+		// Player
+		hero.moving();
+	}
+
+	private void draw() {
+		// Enemy
+		enemySprite.bind();
+		for (int i = 0; i < enemys.size(); i++) {
+			enemys.get(i).draw();
+			enemys.get(i).update();
+		}
+
+		// Player
+		heroSprite.bind();
+		hero.draw();
 	}
 
 }

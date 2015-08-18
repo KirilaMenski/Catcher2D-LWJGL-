@@ -14,46 +14,68 @@ import by.ansgar.catcher2d.main.GamePanel;
 
 public class Enemy implements GameObject {
 
-	private int x;
-	private int y;
+	private double x;
+	private double y;
+	private double dx;
+	private double dy;
 
 	private int speed;
 
 	public Enemy() {
 		x = GamePanel.WIDTH / 2 - 50;
 		y = 55;
-		speed = 3;
+		speed = 2;
+		
+		double angle = Math.toRadians(Math.random() * 360);
+		dx = (Math.sin(angle) * speed);
+		dy = (Math.cos(angle) * speed);
 	}
 
-	public void update(int dx, int dy) {
-		x += dx * speed;
-		y += dy * speed;
+	public void update() {
+		// x += dx * speed;
+		// y += dy * speed;
+		x += dx;
+		y += dy;
+
+		
+
+		if (x < 0 && dx < 0)
+			dx = -dx;
+		if (x > GamePanel.WIDTH - 50 && dx > 0)
+			dx = -dx;
+		if (y < 0 && dy < 0)
+			dy = -dy;
+		if (y > GamePanel.HEIGHT - 50 && dy > 0)
+			dy = -dy;
+
 	}
 
 	public void draw() {
 
 		glBegin(GL_QUADS);
 		glTexCoord2f(0, 0);
-		glVertex2i(x, y);
+		glVertex2d(x, y);
 		glTexCoord2f(1, 0);
-		glVertex2i(x + 50, y);
+		glVertex2d(x + 50, y);
 		glTexCoord2f(1, 1);
-		glVertex2i(x + 50, y + 50);
+		glVertex2d(x + 50, y + 50);
 		glTexCoord2f(0, 1);
-		glVertex2i(x, y + 50);
+		glVertex2d(x, y + 50);
 		glEnd();
 
 	}
 
 	public void moving() {
-		if (x < 0) update(1, 1);
-		if (x > (GamePanel.WIDTH - 50)) update(-1, 1);
-		if (y < 5) update(1, 1);
-		if (y > (GamePanel.HEIGHT - 55)) update(-1, -1);
+
+		// if (x < 0) update(1, 1);
+		// if (x > (GamePanel.WIDTH - 50)) update(-1, 1);
+		// if (y < 5) update(1, 1);
+		// if (y > (GamePanel.HEIGHT - 55)) update(-1, -1);
 	}
 
 	public Texture loadTexture(String key) {
 		try {
+
 			return TextureLoader.getTexture("PNG", new FileInputStream(
 					new File("res/sprites/enemys/image.png")));
 		} catch (FileNotFoundException e) {
@@ -64,7 +86,7 @@ public class Enemy implements GameObject {
 		return null;
 	}
 
-	public int getX() {
+	public double getX() {
 		return x;
 	}
 
@@ -72,7 +94,7 @@ public class Enemy implements GameObject {
 		this.x = x;
 	}
 
-	public int getY() {
+	public double getY() {
 		return y;
 	}
 

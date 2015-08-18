@@ -4,7 +4,7 @@ import org.newdawn.slick.opengl.Texture;
 
 public interface GameObject {
 	
-	public void update(int dx, int dy);
+//	public void update(int dx, int dy);
 	
 	public void draw();
 	

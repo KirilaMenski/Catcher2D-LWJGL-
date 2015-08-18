@@ -5,6 +5,7 @@ import java.awt.RenderingHints.Key;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
+import by.ansgar.catcher2d.entity.Enemy;
 import by.ansgar.catcher2d.entity.MainHero;
 import by.ansgar.catcher2d.main.GamePanel;
 
@@ -15,6 +16,9 @@ public class Input {
 		if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
 			Display.destroy();
 			System.exit(0);
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_R)){
+			GamePanel.enemys.add(new Enemy());
 		}
 
 	}
