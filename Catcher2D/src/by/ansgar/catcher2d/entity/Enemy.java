@@ -24,8 +24,8 @@ public class Enemy implements GameObject {
 	public Enemy() {
 		x = GamePanel.WIDTH / 2 - 50;
 		y = 55;
-		speed = 2;
-		
+		speed = 3;
+
 		double angle = Math.toRadians(Math.random() * 360);
 		dx = (Math.sin(angle) * speed);
 		dy = (Math.cos(angle) * speed);
@@ -36,17 +36,6 @@ public class Enemy implements GameObject {
 		// y += dy * speed;
 		x += dx;
 		y += dy;
-
-		
-
-		if (x < 0 && dx < 0)
-			dx = -dx;
-		if (x > GamePanel.WIDTH - 50 && dx > 0)
-			dx = -dx;
-		if (y < 0 && dy < 0)
-			dy = -dy;
-		if (y > GamePanel.HEIGHT - 50 && dy > 0)
-			dy = -dy;
 
 	}
 
@@ -67,10 +56,10 @@ public class Enemy implements GameObject {
 
 	public void moving() {
 
-		// if (x < 0) update(1, 1);
-		// if (x > (GamePanel.WIDTH - 50)) update(-1, 1);
-		// if (y < 5) update(1, 1);
-		// if (y > (GamePanel.HEIGHT - 55)) update(-1, -1);
+		if (x < 0 && dx < 0) dx = -dx;
+		if (x > GamePanel.WIDTH - 50 && dx > 0) dx = -dx;
+		if (y < 0 && dy < 0) dy = -dy;
+		if (y > GamePanel.HEIGHT - 50 && dy > 0) dy = -dy;
 	}
 
 	public Texture loadTexture(String key) {
