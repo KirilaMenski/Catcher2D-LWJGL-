@@ -22,7 +22,7 @@ public class MainHero implements GameObject {
 	public MainHero() {
 		x = GamePanel.WIDTH / 2 - 25;
 		y = GamePanel.HEIGHT - 55;
-		speed = 3;
+		speed = 2;
 	}
 
 	public void update(int dx, int dy) {
