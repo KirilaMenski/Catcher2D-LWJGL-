@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.lwjgl.LWJGLException;
+import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
@@ -21,16 +22,18 @@ public class GamePanel {
 
 	public static final int WIDTH = 750;
 	public static final int HEIGHT = 550;
+	
+	private long lastFrame;
 
 	public static MainHero hero;
 	public static Enemy enemy;
 	public static List<Enemy> enemys;
 	private Input input;
 	private Background background;
-	Texture heroSprite, enemySprite;
+	Texture heroSprite, enemySprite, backgroundImage;
 
 	public GamePanel() {
-
+		
 		hero = new MainHero();
 		enemy = new Enemy();
 		enemys = new ArrayList<Enemy>();
@@ -38,6 +41,8 @@ public class GamePanel {
 		background = new Background();
 
 		enemys.add(new Enemy());
+		
+		
 
 		try {
 			Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
@@ -49,12 +54,15 @@ public class GamePanel {
 
 		heroSprite = hero.loadTexture("heroSprite");
 		enemySprite = enemy.loadTexture("enemySprite");
+		backgroundImage = background.loadTexture("backgroundImage");
 
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		glOrtho(0, WIDTH, HEIGHT, 0, 1, -1);
 		glMatrixMode(GL_MODELVIEW);
 		glEnable(GL_TEXTURE_2D);
+		
+		lastFrame = getTime();
 
 		while (!Display.isCloseRequested()) {
 
@@ -64,8 +72,8 @@ public class GamePanel {
 			update();
 			draw();
 
-			// background.draw();
-
+			System.out.println(getDelta());
+			
 			Display.update();
 			Display.sync(60);
 
@@ -85,23 +93,45 @@ public class GamePanel {
 		// Enemy
 		for (int i = 0; i < enemys.size(); i++) {
 			enemys.get(i).update();
+			enemys.get(i).moving();
+//			 System.out.println("Hero y =" + (int)hero.getY());
+//			 System.out.println("Enemy y =" + (int)enemys.get(i).getY());
+			if ((int)hero.getY() == (int)enemys.get(i).getY() && (int)hero.getX() == (int)enemys.get(i).getX()) {
+				 System.out.println("You are dead!");
+			}
 		}
 
 		// Player
 		hero.moving();
+
 	}
 
 	private void draw() {
+		
+		//Background
+		backgroundImage.bind();
+		background.draw();
+		
 		// Enemy
 		enemySprite.bind();
 		for (int i = 0; i < enemys.size(); i++) {
 			enemys.get(i).draw();
-			enemys.get(i).update();
 		}
 
 		// Player
 		heroSprite.bind();
 		hero.draw();
+	}
+	
+	private long getTime(){
+		return (Sys.getTime() * 1000) / Sys.getTimerResolution();
+	}
+	
+	private int getDelta(){
+		long currentTime = getTime();
+		int delta =(int) (currentTime - lastFrame);
+		lastFrame = getTime();
+		return delta;
 	}
 
 }
