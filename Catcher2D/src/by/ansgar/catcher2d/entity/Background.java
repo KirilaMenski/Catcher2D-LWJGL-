@@ -14,8 +14,8 @@ import by.ansgar.catcher2d.main.GamePanel;
 
 public class Background implements GameObject {
 	
-	private int x;
-	private int y;
+	private double x;
+	private double y;
 	
 	public Background(){
 		x = 0;
@@ -54,6 +54,34 @@ public class Background implements GameObject {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public boolean intersects(GameObject entity) {
+		return false;
+	}
+
+	@Override
+	public double getX() {
+		// TODO Auto-generated method stub
+		return y;
+	}
+
+	@Override
+	public double getY() {
+		// TODO Auto-generated method stub
+		return x;
+	}
+
+	@Override
+	public void setX(double x) {
+		this.x = x;
+		
+	}
+
+	@Override
+	public void setY(double y) {
+		this.y = y;
+		
 	}
 
 }
