@@ -2,6 +2,7 @@ package by.ansgar.catcher2d.entity;
 
 import static org.lwjgl.opengl.GL11.*;
 
+import java.awt.Rectangle;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,6 +19,7 @@ public class MainHero implements GameObject {
 	private double x;
 	private double y;
 	private int speed;
+	private Rectangle size = new Rectangle();
 
 	public MainHero() {
 		x = GamePanel.WIDTH / 2 - 25;
@@ -63,6 +65,11 @@ public class MainHero implements GameObject {
 		glEnd();
 
 	}
+	
+	public boolean intersects(GameObject entity) {
+		size.setBounds((int)x, (int)y, 50, 50);
+		return size.intersects(getX(), getY(), 50, 50);
+	}
 
 	public int getHealth() {
 		return health;
@@ -95,5 +102,6 @@ public class MainHero implements GameObject {
 	public void setY(double y) {
 		this.y = y;
 	}
+
 
 }
