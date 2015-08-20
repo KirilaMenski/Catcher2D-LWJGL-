@@ -26,16 +26,16 @@ public class Input {
 	public void moveHero() {
 
 		if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
-			GamePanel.hero.update(-1, 0);
+			((MainHero) GamePanel.hero).update(-1, 0);
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
-			GamePanel.hero.update(1, 0);
+			((MainHero) GamePanel.hero).update(1, 0);
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
-			GamePanel.hero.update(0, -1);
+			((MainHero) GamePanel.hero).update(0, -1);
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
-			GamePanel.hero.update(0, 1);
+			((MainHero) GamePanel.hero).update(0, 1);
 		}
 	}
 

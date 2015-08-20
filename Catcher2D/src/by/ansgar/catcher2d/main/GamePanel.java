@@ -15,6 +15,7 @@ import org.newdawn.slick.opengl.Texture;
 
 import by.ansgar.catcher2d.entity.Background;
 import by.ansgar.catcher2d.entity.Enemy;
+import by.ansgar.catcher2d.entity.GameObject;
 import by.ansgar.catcher2d.entity.MainHero;
 import by.ansgar.catcher2d.util.Input;
 
@@ -25,8 +26,9 @@ public class GamePanel {
 	
 	private long lastFrame;
 
-	public static MainHero hero;
-	public static Enemy enemy;
+	public static GameObject hero, enemy;
+//	public static MainHero hero;
+//	public static Enemy enemy;
 	public static List<Enemy> enemys;
 	private Input input;
 	private Background background;
@@ -96,8 +98,12 @@ public class GamePanel {
 			enemys.get(i).moving();
 //			 System.out.println("Hero y =" + (int)hero.getY());
 //			 System.out.println("Enemy y =" + (int)enemys.get(i).getY());
-			if ((int)hero.getY() == (int)enemys.get(i).getY() && (int)hero.getX() == (int)enemys.get(i).getX()) {
-				 System.out.println("You are dead!");
+//			if ((int)hero.getY() == (int)enemys.get(i).getY() && (int)hero.getX() == (int)enemys.get(i).getX()) {
+//				 System.out.println("You are dead!");
+//			}
+			
+			if(enemys.get(i).intersects(hero)){
+				System.out.println("You are dead!");
 			}
 		}
 
