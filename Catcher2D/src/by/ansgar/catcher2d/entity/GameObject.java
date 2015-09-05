@@ -14,6 +14,8 @@ public interface GameObject {
 
 	public boolean intersects(GameObject entity);
 
+	
+	//Fields
 	public double getX();
 
 	public double getY();
@@ -21,5 +23,9 @@ public interface GameObject {
 	public void setX(double x);
 
 	public void setY(double y);
+
+	public void setR(double r);
+
+	public double getR();
 
 }
