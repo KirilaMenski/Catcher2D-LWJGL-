@@ -14,6 +14,7 @@ public class Input {
 	public void input() {
 
 		if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
+			System.out.println("Goodbye");
 			Display.destroy();
 			System.exit(0);
 		}
