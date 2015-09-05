@@ -100,4 +100,16 @@ public class Enemy implements GameObject {
 		this.y = y;
 	}
 
+	@Override
+	public void setR(double r) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public double getR() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
