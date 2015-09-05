@@ -19,12 +19,14 @@ public class MainHero implements GameObject {
 	private double x;
 	private double y;
 	private int speed;
+	private double r;
 	private Rectangle size = new Rectangle();
 
 	public MainHero() {
 		x = GamePanel.WIDTH / 2 - 25;
 		y = GamePanel.HEIGHT - 55;
-		speed = 2;
+		speed = 3;
+		r = 50.0;
 	}
 
 	public void update(int dx, int dy) {
@@ -57,11 +59,11 @@ public class MainHero implements GameObject {
 		glTexCoord2f(0, 0);
 		glVertex2d(x, y);
 		glTexCoord2f(1, 0);
-		glVertex2d(x + 50, y);
+		glVertex2d(x + r, y);
 		glTexCoord2f(1, 1);
-		glVertex2d(x + 50, y + 50);
+		glVertex2d(x + r, y + r);
 		glTexCoord2f(0, 1);
-		glVertex2d(x, y + 50);
+		glVertex2d(x, y + r);
 		glEnd();
 
 	}
@@ -101,6 +103,15 @@ public class MainHero implements GameObject {
 
 	public void setY(double y) {
 		this.y = y;
+	}
+
+	public void setR(double r) {
+		this.r = r;
+		
+	}
+
+	public double getR() {
+		return r;
 	}
 
 
