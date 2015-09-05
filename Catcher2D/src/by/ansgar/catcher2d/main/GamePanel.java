@@ -33,7 +33,6 @@ public class GamePanel {
 	private Input input;
 	private Background background;
 	Texture heroSprite, enemySprite, backgroundImage;
-
 	public GamePanel() {
 		
 		hero = new MainHero();
@@ -43,7 +42,6 @@ public class GamePanel {
 		background = new Background();
 
 		enemys.add(new Enemy());
-		
 		
 
 		try {
@@ -74,7 +72,7 @@ public class GamePanel {
 			update();
 			draw();
 
-			System.out.println(getDelta());
+//			System.out.println(getDelta());
 			
 			Display.update();
 			Display.sync(60);
@@ -104,6 +102,9 @@ public class GamePanel {
 			
 			if(enemys.get(i).intersects(hero)){
 				System.out.println("You are dead!");
+				enemys.remove(i);
+				hero.setR(hero.getR() + 0.1);
+				System.out.println(hero.getR());
 			}
 		}
 
